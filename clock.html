@@ -58,7 +58,9 @@
     var timerID = setInterval(updateTime, 1000);
     async function updateTime() {
       var cd = new Date();
-      clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+      var hours = ((hours + 11) % 12 + 1);
+      var suffix = (cd.getHours() >= 12) ? 'pm' : 'am';
+      clock.time = zeroPadding(hours, 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2) + suffix;
       clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
     }
     function zeroPadding(num, digit) {
